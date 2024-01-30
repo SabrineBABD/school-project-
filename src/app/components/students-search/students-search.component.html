@@ -1,0 +1,46 @@
+<app-banner [title]="'Students search'"></app-banner>
+
+<div class="container site-section">
+    <form [formGroup]="filterForm"  (ngSubmit)="filterStudent()">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Search with Phone number</label>
+                    <input type="text" class="form-control form-control-lg"  formControlName="tel"  placeholder="Phone number">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Search with First Name</label>
+                    <input type="text" class="form-control form-control-lg"  formControlName="firstName"  placeholder="First Name">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Search with Last Name</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="lastName"  placeholder="Last Name">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center mt-3">
+            <input type="submit" value="Filter" class="btn btn-primary btn-lg px-5">
+        </div>
+    </form>
+   
+    <div class="row mt-3">
+      <div class="col-lg-6 mt-3" *ngFor="let s of  filteredStudents">
+        <div class="custom-media d-flex">
+          <div class="img mr-4">
+            <img [src]="s.image" alt="Image" class="img-fluid"  style="width: 200px; height: 200px;">
+          </div>
+          <div class="text mt-3">
+            <h4 class="mb-4"><a href="#">{{s.firstName}} {{s.lastName}}</a></h4>
+            <h5 class="mb-4">Email:{{s.email}}</h5>
+            <h5 class="mb-4">Phone number:{{s.tel}}</h5>
+
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>

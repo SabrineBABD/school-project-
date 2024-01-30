@@ -1,0 +1,47 @@
+<app-banner [title]="'Assign students'"></app-banner>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <form  #assignForm="ngForm" (ngSubmit)="assignStudent()" class="col-md-12">
+             
+                <div class="col-12 form-group">
+                    <label for="student">Student</label>
+                   
+                    <select  [(ngModel)]="selectedStudent" [ngModelOptions]="{standalone: true}" class="form-control" >
+                        <option *ngFor="let s of students" [value]="s._id">{{s.firstName}} {{s.lastName}} ( id: {{s._id}} )</option>
+
+                    </select>
+
+                </div>
+
+               <div class="col-12 form-group">
+                    <label for="Teacher">Teacher</label>
+                   
+                    <select  [(ngModel)]="selectedTeacher" (change)="onTeacherChange()" [ngModelOptions]="{standalone: true}" class="form-control" >
+                        <option *ngFor="let t of teachers" [value]="t._id">{{t.firstName}} {{t.lastName}} ( id: {{t._id}} )</option>
+
+                    </select>
+                </div>
+
+                
+                <div class="col-12 form-group">
+                    <label for="course">Course</label>
+                   
+                    <select  [(ngModel)]="selectedCourse" [ngModelOptions]="{standalone: true}" class="form-control" >
+                        <option *ngFor="let c of courses" [value]="c._id">{{c.name}}</option>
+
+                    </select>
+                </div> 
+
+
+                <div class="row mt-3 ">
+                    <div class="col-12 text-center">
+                        <input type="submit" value="Assign Student"
+                            class="btn btn-primary btn-lg px-5">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

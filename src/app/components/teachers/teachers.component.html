@@ -1,0 +1,38 @@
+<app-banner [title]="'Filter teachers'"></app-banner>
+
+<div class="container site-section">
+    <form #filterForm="ngForm" (ngSubmit)="filterTeacher()">
+        <div class="row">
+            <div class="col-12 ">
+              <div class="form-group">
+                  <label>Teacher speciality</label>
+                  <input type="text" class="form-control form-control-lg" [(ngModel)]="filter.speciality" [ngModelOptions]="{standalone: true}" placeholder="Speciality">
+                </div>
+            </div>
+
+
+            <div class="col-12 text-center mt-3 ">
+                <div class="col-12 text-center">
+                    <input type="submit" value="Filter" class="btn btn-primary btn-lg px-5">
+                </div>
+            </div>
+          </div>
+    </form>
+   
+    <div class="row mt-3">
+      <div class="col-lg-6 mt-3" *ngFor="let t of  filteredTeachers">
+        <div class="custom-media d-flex">
+          <div class="img mr-4">
+            <img [src]="t.image" alt="Image" class="img-fluid"  style="width: 200px; height: 200px;">
+          </div>
+          <div class="text mt-3">
+            <h4 class="mb-4"><a href="#">{{t.firstName}} {{t.lastName}}</a></h4>
+            <h5 class="mb-4">Email:{{t.email}}</h5>
+            <h5 class="mb-4">Phone number:{{t.tel}}</h5>
+
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>

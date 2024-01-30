@@ -1,0 +1,43 @@
+<app-banner [title]="title"></app-banner>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <form  #addcourseForm="ngForm" (ngSubmit)="addEditCourse()" class="col-md-12">
+             
+                <div class="col-12 form-group">
+                    <label for="course">Speciality</label>
+                   
+                    <select  [(ngModel)]="course.speciality" [ngModelOptions]="{standalone: true}" class="form-control" >
+                        <option *ngFor="let t of uniqueSpecialities" [value]="t">{{t}}</option>
+
+                    </select>
+                </div>
+
+
+                <div class="col-12 form-group">
+                    <label for="course">Course name</label>
+                    <input [(ngModel)]="course.name" [ngModelOptions]="{standalone: true}" type="text"  id="course" class="form-control form-control-lg">
+                
+                </div>
+                
+                    <div class="col-md-12 form-group">
+                        <label for="desc">Description</label>
+                        <textarea [(ngModel)]="course.desc" [ngModelOptions]="{standalone: true}" name="" id="desc" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+            
+                <div class="col-12 form-group mt-3">
+                    <input type="file" (change)="onFileSelected($event)" />
+                    <button class="btn btn-success" (click)="onUpload()">Upload</button>
+                </div>
+
+                <div class="row mt-3 ">
+                    <div class="col-12 text-center">
+                        <input type="submit" value="{{title}}"
+                            class="btn btn-primary btn-lg px-5">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<app-banner [title]="title"></app-banner>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <form  #addResultForm="ngForm" (ngSubmit)="addEditResult()" class="col-md-12">
+             
+      
+                <div class="col-12 form-group">
+                    <label for="course">Course</label>
+                   
+                    <select  [(ngModel)]="selectedCourse" (change)="onCourseChange()" [ngModelOptions]="{standalone: true}" class="form-control" >
+                        <option *ngFor="let c of courses" [value]="c._id">{{c.name}}</option>
+
+                    </select>
+                </div> 
+
+
+
+                <div class="col-12 form-group">
+                    <label for="student">Student</label>
+                   
+                    <select  [(ngModel)]="selectedStudent" [ngModelOptions]="{standalone: true}" class="form-control" >
+                        <option *ngFor="let s of students" [value]="s.studentId._id">{{s.studentId.firstName}} {{s.studentId.lastName}} ( id: {{s.studentId._id}} )</option>
+
+                    </select>
+
+                </div>
+
+              
+
+               <div class="col-12 form-group">
+                    <label for="note">Note</label>
+                    <input type="number"  [(ngModel)]="note" [ngModelOptions]="{standalone: true}"  id="note" class="form-control form-control-lg">
+            
+                </div>
+                
+                
+              <div class="col-12 form-group">
+                <label for="evaluation">Evaluation</label>
+                <select   [(ngModel)]="selectedEvaluation" [ngModelOptions]="{standalone: true}" class="form-control" >
+                    <option value="Very bad" >Very bad</option>
+                    <option value=" Bad" >Bad</option>
+                    <option value="Okay" >Okay</option>
+                    <option value="Good" >Good</option>
+                    <option value="Great">Great</option>
+                    <option value="Excellent">Excellent</option>
+                </select>
+            </div>
+
+                <div class="row mt-3 ">
+                    <div class="col-12 text-center">
+                        <input type="submit" value={{title}}
+                            class="btn btn-primary btn-lg px-5">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

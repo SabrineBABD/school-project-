@@ -1,0 +1,43 @@
+<app-banner [title]="'Students list'"></app-banner>
+  <div class="site-section ">
+    <div class="container ">
+      <div class="row">
+        <div class="col-lg-12 ">
+            <div class="widget-next-match table-responsive">
+                <table class="table custom-table">
+                  <thead>
+                    <tr>
+                      <th>Picture</th>
+                      <th>First name</th>
+                      <th>Last name</th>
+                      <th>id</th>
+                      <th *ngIf ="connectedUser.role !== 'Student'">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                    <tr *ngFor="let s of students">
+                      <td><img [src]="s.studentId.image" width="100px"></td>
+                      <td>{{s.studentId.firstName}}</td>
+                      <td>{{s.studentId.lastName}}</td>
+                      <td>{{s.studentId._id}}</td>
+                      <td *ngIf ="connectedUser.role !== 'Student'">
+                        <button class="btn btn-danger" (click)="deleteStudentFromList(s.studentId._id)"   type="button"  >
+                            <i class="icon-trash-o"></i>
+                        </button>
+                      </td>
+                     
+                    </tr>
+                
+                
+                  </tbody>
+                </table>
+              </div>
+        </div>
+      
+
+        
+      </div>
+    </div>
+  </div>
+

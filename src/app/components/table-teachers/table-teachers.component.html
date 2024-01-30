@@ -1,0 +1,70 @@
+<app-banner [title]="'Table teachers'"></app-banner>
+<div class="site-section ">
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-12 ">
+          <div class="widget-next-match table-responsive">
+              <table class="table custom-table">
+                <thead>
+                  <tr>
+                    <th>Picture</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Speciality</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>CV</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let u of users" >
+                    <td><img [src]="u.image" width="100px"></td>
+                    <td>{{u.firstName}}</td>
+                    <td>{{u.lastName}}</td>
+                    <td>{{u.speciality}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.tel}}</td>
+                    <td> 
+                      <a *ngIf="u?.cv" [href]="u?.cv" download="cv.pdf" class="btn btn-primary">
+                      Download
+                    </a></td>
+                    <td>
+                      <button [class.btn-danger]="u.status" [class.btn-primary]="!u.status" (click)="toggleStatus(u)">
+                          {{ !u.status ? 'Activate' : 'Deactivate' }}
+                      </button>
+                      <div>Status: {{ u.status ? 'The teacher is activate' : 'The teacher is deactivate' }}</div>
+                    </td>
+                   
+                  </tr>
+              
+              
+                </tbody>
+              </table>
+            </div>
+      </div>
+    
+
+      
+    </div>
+  </div>
+</div> 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5 btn-dark" id="exampleModalLabel"> Delete match </h1>
+      <button type="button" class="btn-close btn-danger"  data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+     Do you want to delete this match: {{obj?.teamOne}} VS {{obj?.teamTwo}}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+      <button type="button" class="btn btn-primary" (click)="deleteMatch()" data-bs-dismiss="modal" >Yes</button>
+    </div>
+  </div>
+</div>
+</div>  

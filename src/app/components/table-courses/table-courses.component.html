@@ -1,0 +1,97 @@
+<app-banner [title]="'Table courses'"></app-banner>
+<div class="site-section ">
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-12 ">
+        <div class="widget-next-match table-responsive">
+          <table class="table custom-table">
+            <thead>
+              <tr>
+                <th>Speciality</th>
+                <th>Course name</th>
+                <th>Teacher</th>
+                <th *ngIf="connectedUser && connectedUser.role !== 'Parent'">Description</th>
+                <th *ngIf="connectedUser && connectedUser.role !== 'Parent'">Pdf</th>
+                <th *ngIf="connectedUser && connectedUser.role !== 'Parent'">Students</th>
+                <th>Result</th>
+                <th *ngIf="connectedUser && (connectedUser.role === 'Teacher' || connectedUser.role === 'Admin')">Delete</th>
+                <th *ngIf="connectedUser && connectedUser.role === 'Teacher'">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <ng-container *ngIf="connectedUser && connectedUser.role === 'Student'">
+                <tr *ngFor="let a of assignedCourses">
+                  <td>{{ a.courseId?.speciality }}</td>
+                  <td>{{ a.courseId?.name }}</td>
+                  <td>{{ a.teacherId?.firstName }} {{ a.teacherId?.lastName }}</td>
+                  <td>{{ a.courseId?.desc }}</td>
+                  <td>
+                    <a *ngIf="a.courseId?.cpdf" [href]="a.courseId?.cpdf" download="course_file.pdf" class="btn btn-primary">
+                      Download
+                    </a>
+                  </td>
+                  <td>
+                    <button class="btn btn-info" (click)="navigateTo(a.courseId?._id, '/students-list/')">
+                      <i class="icon-list"></i>
+                    </button>
+                  </td>
+
+                  <td>
+                    <button class="btn btn-info" (click)="navigateTo(a.courseId?._id, '/result/')">
+                      <i class="icon-eye"></i>
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+
+              <ng-container *ngIf="connectedUser && (connectedUser.role === 'Teacher' || connectedUser.role === 'Admin' || connectedUser.role === 'Parent')">
+                <tr *ngFor="let c of courses">
+                  <td>{{ c.speciality }}</td>
+                  <td>{{ c.name }}</td>
+                  <td>{{ c.teacherId?.firstName }} {{ c.teacherId?.lastName }}</td>
+                  <td *ngIf="connectedUser.role === 'Teacher' || connectedUser.role === 'Admin'">{{ c.desc }}</td>
+                  <td *ngIf="connectedUser.role === 'Teacher' || connectedUser.role === 'Admin'">
+                    <a *ngIf="c.cpdf" [href]="c.cpdf" download="course_file.pdf" class="btn btn-primary">
+                      Download
+                    </a>
+                  </td>
+                  <td *ngIf="connectedUser.role === 'Teacher' || connectedUser.role === 'Admin'">
+                    <button class="btn btn-info" (click)="navigateTo(c._id, '/students-list/')">
+                      <i class="icon-list"></i>
+                    </button>
+                  </td>
+
+                  <td>
+                    <span *ngIf="connectedUser.role === 'Teacher' || connectedUser.role === 'Admin'">
+                      <button class="btn btn-info" (click)="navigateTo(c._id, '/table-result/')">
+                        <i class="icon-eye"></i>
+                      </button>
+                    </span>
+                    <span *ngIf="connectedUser.role === 'Parent'">
+                      <button class="btn btn-info" (click)="navigateTo(c._id, '/result/')">
+                        <i class="icon-eye"></i>
+                      </button>
+                    </span>
+                  </td>
+
+                  <td *ngIf="connectedUser.role === 'Teacher' || connectedUser.role === 'Admin'">
+                    <button class="btn btn-danger" (click)="deleteCourse(c._id)" type="button">
+                      <i class="icon-trash-o"></i>
+                    </button>
+                  </td>
+                  <td *ngIf="connectedUser.role === 'Teacher'">
+                    <button class="btn btn-info" (click)="navigateTo(c._id, '/add-course/')" type="button">
+                      <i class="icon-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
